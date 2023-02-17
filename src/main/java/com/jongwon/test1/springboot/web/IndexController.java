@@ -1,5 +1,8 @@
 package com.jongwon.test1.springboot.web;
 
+import com.jongwon.test1.springboot.config.auth.LoginUser;
+import com.jongwon.test1.springboot.config.auth.dto.SessionUser;
+import com.jongwon.test1.springboot.domain.user.User;
 import com.jongwon.test1.springboot.service.PostsService;
 import com.jongwon.test1.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -9,15 +12,24 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
+
+        //SessionUser user = (SessionUser)(httpSession.getAttribute("user"));
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 

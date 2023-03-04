@@ -4,7 +4,7 @@ REPOSITORY=/home/ec2-user/app/step2
 PROJECT_NAME=Test01-Springboot
 
 echo "> copy build-file"
-cp $REPOSITORY/zip/build/libs/*.jar $REPOSITORY
+cp $REPOSITORY/zip/*.jar $REPOSITORY
 
 echo "> check app id"
 CURRENT_PID=$(pgrep -fl ${PROJECT_NAME}*.jar | grep jar | awk '{print $1}')

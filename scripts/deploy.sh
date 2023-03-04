@@ -7,7 +7,7 @@ echo "> copy build-file"
 cp $REPOSITORY/zip/*.jar $REPOSITORY
 
 echo "> check app id"
-CURRENT_PID=$(pgrep -fl ${PROJECT_NAME}*.jar | grep jar | awk '{print $1}')
+CURRENT_PID=$(pgrep -f ${PROJECT_NAME}*.jar | grep jar | awk '{print $1}')
 echo "> current pid is $CURRENT_PID"
 
 if [ -z "$CURRENT_PID" ]; then
